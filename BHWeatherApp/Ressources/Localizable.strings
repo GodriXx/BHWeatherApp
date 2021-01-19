@@ -1,0 +1,11 @@
+/* 
+  Localizable.strings
+  BHWeatherApp
+
+  Created by Bassem Hatira on 19/01/2021.
+  
+*/
+
+//Mark: Home
+"home_title"                =   "Home";
+"home_empty"                =   "No data, please add new locations 🙏🏻";

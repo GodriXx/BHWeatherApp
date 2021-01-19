@@ -15,12 +15,20 @@ struct Daily: Codable {
     let feelsLike: FeelsLike?
     let pressure: Int?
     let humidity: Int?
-    let wind_speed: Double?
+    let windSpeed: Double?
     let weather: [Weather]?
     let uvi: Double?
     
     enum CodingKeys : String, CodingKey {
         case dailyDt = "dt"
-        case sunrise, sunset, temp, feelsLike, pressure, humidity, wind_speed, weather, uvi
+        case windSpeed = "wind_speed"
+        case feelsLike = "feels_like"
+        case sunrise, sunset, temp, pressure, humidity, weather, uvi
+    }
+    
+    func getDailyWrapper(timezoneOffset: Int) -> DailyWrapper {
+        var dailyWrapper = DailyWrapper(daily: self)
+        dailyWrapper.timezoneOffset = timezoneOffset
+        return dailyWrapper
     }
 }

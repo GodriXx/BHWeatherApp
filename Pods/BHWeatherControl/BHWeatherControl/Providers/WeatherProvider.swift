@@ -17,7 +17,7 @@ public class WeatherProvider {
     }
     
     public func getCurrentWeathers(locations: [Location],
-                                   onSuccess: @escaping ([WeatherObject]?) -> Void,
+                                   onSuccess: @escaping ([WeatherWrapper]?) -> Void,
                                    onError: @escaping (Error?) -> Void) {
         guard let weatherWorker = self.weatherWorker else {
             onError(ConnexionError.internalError)
@@ -33,7 +33,7 @@ public class WeatherProvider {
     }
     
     public func getWeatherDetails(location: Location,
-                                  onSuccess: @escaping (WeatherObject?) -> Void,
+                                  onSuccess: @escaping (WeatherWrapper?) -> Void,
                                   onError: @escaping (Error?) -> Void) {
         guard let weatherWorker = self.weatherWorker else {
             onError(ConnexionError.internalError)
