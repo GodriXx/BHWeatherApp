@@ -1,5 +1,5 @@
 PODS:
-  - BHWeatherControl (1.0.0)
+  - BHWeatherControl (1.1.0)
 
 DEPENDENCIES:
   - BHWeatherControl (from `https://github.com/GodriXx/BHWeatherControl.git`)
@@ -10,11 +10,11 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   BHWeatherControl:
-    :commit: 0c5abba67ff42906dc70f070004353888440e592
+    :commit: 7f2c0e5bc7535309fe52676706ee085fef843705
     :git: https://github.com/GodriXx/BHWeatherControl.git
 
 SPEC CHECKSUMS:
-  BHWeatherControl: 2c340820b8229bd6f749f9ea4365871726608488
+  BHWeatherControl: c9fbcd8c00fe3ee422f2c045a1ca7cd026d86751
 
 PODFILE CHECKSUM: 589c0d7b1e3c93285ed96ef56ff566ff7597b8c6
 

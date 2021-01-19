@@ -7,9 +7,18 @@
 
 import Foundation
 
-public struct WeatherObject: Codable {
+struct WeatherObject: Codable {
     let timezone: String?
-    let timezone_offset: Int?
+    let timezoneOffset: Int?
     let current: Current?
     let daily: [Daily]?
+    
+    enum CodingKeys : String, CodingKey {
+        case timezoneOffset = "timezone_offset"
+        case timezone, current, daily
+    }
+    
+    func getWeatherWrapper() -> WeatherWrapper {
+        return WeatherWrapper(weatherObject: self)
+    }
 }
