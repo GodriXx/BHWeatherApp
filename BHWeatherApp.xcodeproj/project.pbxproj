@@ -30,6 +30,9 @@
 		8FBBB4C825B853EC00AE5A3B /* LocationCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FBBB4C725B853EC00AE5A3B /* LocationCellViewModel.swift */; };
 		8FBBB4D025B8553C00AE5A3B /* AddLocationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FBBB4CF25B8553C00AE5A3B /* AddLocationViewModel.swift */; };
 		8FBBB4D825B873AF00AE5A3B /* BHColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FBBB4D725B873AF00AE5A3B /* BHColor.swift */; };
+		8FBBB4E425B8932A00AE5A3B /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FBBB4E325B8932A00AE5A3B /* DataManager.swift */; };
+		8FBBB4ED25B895F300AE5A3B /* WeatherModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FBBB4EC25B895F300AE5A3B /* WeatherModel.swift */; };
+		8FBBB50625B8A2EF00AE5A3B /* DailyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FBBB50525B8A2EF00AE5A3B /* DailyModel.swift */; };
 		8FF4D81725B6EAD000FD900F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FF4D81625B6EAD000FD900F /* SceneDelegate.swift */; };
 		8FF4D84B25B6F0E500FD900F /* StoryboardBased.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FF4D84A25B6F0E500FD900F /* StoryboardBased.swift */; };
 		8FF4D85425B6F1DB00FD900F /* NSObject+BH.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FF4D85325B6F1DB00FD900F /* NSObject+BH.swift */; };
@@ -90,6 +93,9 @@
 		8FBBB4C725B853EC00AE5A3B /* LocationCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationCellViewModel.swift; sourceTree = "<group>"; };
 		8FBBB4CF25B8553C00AE5A3B /* AddLocationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLocationViewModel.swift; sourceTree = "<group>"; };
 		8FBBB4D725B873AF00AE5A3B /* BHColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BHColor.swift; sourceTree = "<group>"; };
+		8FBBB4E325B8932A00AE5A3B /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
+		8FBBB4EC25B895F300AE5A3B /* WeatherModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherModel.swift; sourceTree = "<group>"; };
+		8FBBB50525B8A2EF00AE5A3B /* DailyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyModel.swift; sourceTree = "<group>"; };
 		8FF4D81625B6EAD000FD900F /* SceneDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		8FF4D84A25B6F0E500FD900F /* StoryboardBased.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryboardBased.swift; sourceTree = "<group>"; };
 		8FF4D85325B6F1DB00FD900F /* NSObject+BH.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSObject+BH.swift"; sourceTree = "<group>"; };
@@ -196,6 +202,8 @@
 		8F73A45525B6E8A80001E61D /* BHWeatherApp */ = {
 			isa = PBXGroup;
 			children = (
+				8FBBB4E825B895D400AE5A3B /* Models */,
+				8FBBB4E225B892C500AE5A3B /* Managers */,
 				8FF4D87A25B6F52300FD900F /* Constants */,
 				8FF4D85225B6F1CD00FD900F /* Extensions */,
 				8FF4D84925B6F0D600FD900F /* Protocols */,
@@ -237,6 +245,23 @@
 				8FBBB4BE25B8539D00AE5A3B /* LocationCell.xib */,
 			);
 			path = AddLocationCell;
+			sourceTree = "<group>";
+		};
+		8FBBB4E225B892C500AE5A3B /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				8FBBB4E325B8932A00AE5A3B /* DataManager.swift */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
+		8FBBB4E825B895D400AE5A3B /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				8FBBB4EC25B895F300AE5A3B /* WeatherModel.swift */,
+				8FBBB50525B8A2EF00AE5A3B /* DailyModel.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		8FF4D84925B6F0D600FD900F /* Protocols */ = {
@@ -542,6 +567,7 @@
 				8FF4D88825B6FB4D00FD900F /* HomeViewModel.swift in Sources */,
 				8F73A45725B6E8A80001E61D /* AppDelegate.swift in Sources */,
 				8FF4D84B25B6F0E500FD900F /* StoryboardBased.swift in Sources */,
+				8FBBB50625B8A2EF00AE5A3B /* DailyModel.swift in Sources */,
 				8FBBB4D025B8553C00AE5A3B /* AddLocationViewModel.swift in Sources */,
 				8F353BC225B8387C00BDB8DB /* UIApplication+BH.swift in Sources */,
 				8FF4D87C25B6F53600FD900F /* BHFont.swift in Sources */,
@@ -553,7 +579,9 @@
 				8FFE89C625B764F6009CE190 /* BHText.swift in Sources */,
 				8F353BCC25B8394900BDB8DB /* ToastView.swift in Sources */,
 				8F353BDB25B83CB900BDB8DB /* UISearchBar+BH.swift in Sources */,
+				8FBBB4E425B8932A00AE5A3B /* DataManager.swift in Sources */,
 				8FBBB4BF25B8539D00AE5A3B /* LocationCell.swift in Sources */,
+				8FBBB4ED25B895F300AE5A3B /* WeatherModel.swift in Sources */,
 				8F353BD625B839E800BDB8DB /* UIView+BH.swift in Sources */,
 				8FF4D85425B6F1DB00FD900F /* NSObject+BH.swift in Sources */,
 			);

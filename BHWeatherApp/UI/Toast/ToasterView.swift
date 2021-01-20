@@ -13,6 +13,7 @@ private let defaultDisplayTime = 5.0
 enum ToastType {
     case APIError
     case Advice
+    case AddError
 }
 
 class ToasterView: UIView {
