@@ -8,7 +8,8 @@
 import UIKit
 import BHWeatherControl
 
-class HomeViewController: UIViewController {
+class HomeViewController: UIViewController, StoryboardBased
+{
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var lblEmpty: UILabel!
@@ -54,7 +55,7 @@ class HomeViewController: UIViewController {
     }
     
     @objc private func goToAddLocation() {
-        //To be completed
+        self.present(AddLocationViewController.instanciate(), animated: true, completion: nil)
     }
 }
 
