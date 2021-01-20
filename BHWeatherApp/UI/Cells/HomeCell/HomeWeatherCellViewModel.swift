@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import BHWeatherControl
 
 class HomeWeatherCellViewModel {
     
@@ -15,12 +14,12 @@ class HomeWeatherCellViewModel {
     var strLocation: String?
     var imgWeather: UIImage?
     
-    init(weather: WeatherWrapper) {
-        self.strTime = weather.currentTime
+    init(weatherModel: WeatherModel) {
+        self.strTime = weatherModel.currentTime
         //TODO: update location Name
-        self.strLocation = weather.timezoneName
-        self.strTemp = String(Int(weather.temperature ?? 0.0))
-        self.imgWeather = UIImage(named: weather.icon ?? "")
+        self.strLocation = weatherModel.cityName
+        self.strTemp = String(Int(weatherModel.temperature ?? 0.0))
+        self.imgWeather = weatherModel.image
     }
     
 }

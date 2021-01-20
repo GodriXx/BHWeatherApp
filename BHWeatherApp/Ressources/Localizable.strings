@@ -15,4 +15,5 @@
 "location_placeholder"      =   "Search location";
 
 //Mark: errors
-"wrong_data"                = "Please, you need to tap at least two letters to begin search";
+"wrong_data"                =   "Please, you need to tap at least two letters to begin search";
+"already_exist"             =   "This location already exist !";

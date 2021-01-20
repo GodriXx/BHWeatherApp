@@ -9,7 +9,9 @@ import Foundation
 import MapKit
 
 class AddLocationViewModel: NSObject {
+    
     weak var view: AddLocationProtocol?
+    
     var locationCells: [LocationCellViewModel]? {
         didSet {
             guard let locationCells = locationCells else { return }
@@ -29,23 +31,32 @@ class AddLocationViewModel: NSObject {
         self.searchCompleter.queryFragment = text
     }
     
-    func getCoordinate(fromLocation location:LocationCellViewModel) -> CLLocationCoordinate2D {
+    func getCoordinate(fromLocation location: LocationCellViewModel, onCompletion: @escaping(Bool) -> Void ) {
         
         let searchRequest = MKLocalSearch.Request(completion: location.mkLocation)
-        var locationCoordinate: CLLocationCoordinate2D?
         let search = MKLocalSearch(request: searchRequest)
+        
         search.start { (response, error) in
-            guard let coordinate = response?.mapItems[0].placemark.coordinate else {
+            guard let _ = error else {
+                guard let coordinate = response?.mapItems[0].placemark.coordinate else {
+                    onCompletion(false)
+                    return
+                }
+                if !DataManager.shared.isWeatherExist(cityName: location.strCity ?? "") {
+                    let weatherModel = WeatherModel(cityName: location.strCity,
+                                                    citySubtitle: location.strRegion,
+                                                    coordinate: coordinate)
+                    DataManager.shared.saveWeatherLocation(weatherModel: weatherModel)
+                    onCompletion(true)
+                } else {
+                    onCompletion(false)
+                }
                 return
             }
-            
-            locationCoordinate = coordinate
-            
-            print(coordinate)
-            
+            return onCompletion(false)
         }
-        return locationCoordinate ?? CLLocationCoordinate2D()
     }
+    
 }
 
 extension AddLocationViewModel: MKLocalSearchCompleterDelegate {

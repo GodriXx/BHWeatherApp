@@ -19,6 +19,8 @@ class AddLocationViewController: UIViewController, StoryboardBased {
     @IBOutlet weak var loader: UIActivityIndicatorView!
     @IBOutlet weak var lblTitle: UILabel!
     
+    var homeViewDelegate: HomeViewDelegate?
+    
     private let delayToReload = 0.3
     
     private var errorTask: DispatchWorkItem = DispatchWorkItem {}
@@ -147,9 +149,16 @@ extension AddLocationViewController: UITableViewDelegate, UITableViewDataSource 
         guard let locationCells = self.viewModel.locationCells else { return }
         let result = locationCells[indexPath.row]
         
-        //TODO: to be used in details
-        let _ = self.viewModel.getCoordinate(fromLocation: result)
-        self.dismiss(animated: true, completion: nil)
+        self.viewModel.getCoordinate(fromLocation: result) { (status) in
+            if status {
+                self.dismiss(animated: true) {
+                    guard let homeViewDelegate = self.homeViewDelegate else { return }
+                    homeViewDelegate.updateData()
+                }
+            } else {
+                ToastManager.displayToast(type: .AddError, with: 2.0, and: BHText.already_exist.value)
+            }
+        }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

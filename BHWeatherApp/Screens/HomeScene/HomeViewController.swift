@@ -8,16 +8,20 @@
 import UIKit
 import BHWeatherControl
 
-class HomeViewController: UIViewController, StoryboardBased
-{
+protocol HomeViewDelegate: class {
+    func updateData()
+}
+
+class HomeViewController: UIViewController, StoryboardBased {
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var lblEmpty: UILabel!
+    @IBOutlet weak var loader: UIActivityIndicatorView!
     
     var viewModel: HomeViewModel = HomeViewModel()
     
     private var cellViewModels: [HomeWeatherCellViewModel]? {
-        didSet{
+        didSet {
             self.tableView.reloadData()
         }
     }
@@ -25,7 +29,8 @@ class HomeViewController: UIViewController, StoryboardBased
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupUI()
-        self.setupViewModel()
+        self.setupTableView()
+        self.getWeatherData()
     }
     
     private func setupUI() {
@@ -35,13 +40,12 @@ class HomeViewController: UIViewController, StoryboardBased
         navigationItem.rightBarButtonItem = add
         
         self.lblEmpty.text = BHText.home_empty.value
-        
-        self.setupTableView()
     }
-    
-    private func setupViewModel() {
-        //TODO: import locations from data storage
-        viewModel.getHomeWeathers(locations: [Location(lat: "48.9167", lon: "2.25"),Location(lat: "36.81897", lon: "10.16579"), Location(lat: "48.853401", lon: "2.3486"), Location(lat: "45.650879", lon: "-68.698921")]) { (homeWeatherCellViewModels) in
+        
+    private func getWeatherData() {
+        self.loader.startAnimating()
+        self.viewModel.getHomeWeathers { (homeWeatherCellViewModels) in
+            self.loader.stopAnimating()
             self.tableView.isHidden = homeWeatherCellViewModels.isEmpty
             self.cellViewModels = homeWeatherCellViewModels
         } onError: { (error) in
@@ -55,7 +59,9 @@ class HomeViewController: UIViewController, StoryboardBased
     }
     
     @objc private func goToAddLocation() {
-        self.present(AddLocationViewController.instanciate(), animated: true, completion: nil)
+        let controller = AddLocationViewController.instanciate()
+        controller.homeViewDelegate = self
+        self.present(controller, animated: true, completion: nil)
     }
 }
 
@@ -93,11 +99,19 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if (editingStyle == .delete) {
-            tableView.beginUpdates()
-            cellViewModels?.remove(at: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: .automatic)
-            tableView.endUpdates()
+            self.viewModel.removeWeather(index: indexPath.row) { (status) in
+                if status {
+                    self.getWeatherData()
+                }
+            }
         }
+    }
+}
+
+extension HomeViewController: HomeViewDelegate {
+    
+    func updateData() {
+        self.getWeatherData()
     }
 }
 

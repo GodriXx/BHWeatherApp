@@ -18,7 +18,8 @@ enum BHText: String {
          location_placeholder
     
     //Mark: error msg
-    case wrong_data
+    case wrong_data,
+         already_exist
     
     var value: String {
         return self.rawValue.localized

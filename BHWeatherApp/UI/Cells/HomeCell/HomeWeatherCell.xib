@@ -31,7 +31,7 @@
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="22" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EkX-0f-Cb6">
-                        <rect key="frame" x="223.5" y="17" width="60.5" height="66"/>
+                        <rect key="frame" x="228.5" y="17" width="60.5" height="66"/>
                         <constraints>
                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="40" id="ujW-X1-BGl"/>
                         </constraints>
@@ -40,7 +40,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Colombes" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DJh-IA-E45">
-                        <rect key="frame" x="16" y="51" width="109.5" height="30"/>
+                        <rect key="frame" x="16" y="51" width="197" height="30"/>
                         <fontDescription key="fontDescription" name="AppleSDGothicNeo-Bold" family="Apple SD Gothic Neo" pointSize="25"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -49,14 +49,14 @@
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="HxF-hi-VVY" secondAttribute="trailing" id="8Rc-EO-X6D"/>
                     <constraint firstItem="HxF-hi-VVY" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="BOB-it-KAi"/>
-                    <constraint firstItem="HxF-hi-VVY" firstAttribute="leading" secondItem="EkX-0f-Cb6" secondAttribute="trailing" constant="4" id="DHG-hI-qYp"/>
+                    <constraint firstItem="HxF-hi-VVY" firstAttribute="leading" secondItem="EkX-0f-Cb6" secondAttribute="trailing" constant="-1" id="DHG-hI-qYp"/>
                     <constraint firstItem="Gr3-da-b0V" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="Jhp-fm-hGZ"/>
                     <constraint firstItem="Gr3-da-b0V" firstAttribute="centerY" secondItem="EkX-0f-Cb6" secondAttribute="centerY" constant="-16" id="Kag-FV-QoR"/>
                     <constraint firstItem="EkX-0f-Cb6" firstAttribute="centerY" secondItem="HxF-hi-VVY" secondAttribute="centerY" id="LYI-ld-ti1"/>
                     <constraint firstItem="DJh-IA-E45" firstAttribute="centerY" secondItem="EkX-0f-Cb6" secondAttribute="centerY" constant="16" id="Mng-0e-jDl"/>
                     <constraint firstAttribute="bottom" secondItem="HxF-hi-VVY" secondAttribute="bottom" id="Pbb-b6-z7a"/>
                     <constraint firstItem="DJh-IA-E45" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="gHa-YB-mFe"/>
-                    <constraint firstItem="EkX-0f-Cb6" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="DJh-IA-E45" secondAttribute="trailing" constant="10" id="how-Pp-YiE"/>
+                    <constraint firstAttribute="trailing" secondItem="DJh-IA-E45" secondAttribute="trailing" constant="175" id="xcb-Vy-enO"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>

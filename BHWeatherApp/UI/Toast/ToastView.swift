@@ -18,6 +18,8 @@ class ToastView: UIView {
             self.imageView.image = #imageLiteral(resourceName: "error")
         case .Advice:
             self.imageView.image = #imageLiteral(resourceName: "warning")
+        case .AddError:
+            self.imageView.image = #imageLiteral(resourceName: "error")
         }
         
         self.messageLabel.text = message
