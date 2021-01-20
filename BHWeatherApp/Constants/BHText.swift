@@ -9,8 +9,16 @@ import Foundation
 
 enum BHText: String {
     
+    //Mark: Home
     case home_title,
          home_empty
+    
+    //Mark: Location
+    case location_title,
+         location_placeholder
+    
+    //Mark: error msg
+    case wrong_data
     
     var value: String {
         return self.rawValue.localized

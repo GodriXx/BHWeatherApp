@@ -8,6 +8,15 @@
 
 /* Begin PBXBuildFile section */
 		313744D67262CEE5FFFBD7A8 /* Pods_BHWeatherApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A84A76405DEA1FF80EC7A028 /* Pods_BHWeatherApp.framework */; };
+		8F353BAD25B8366100BDB8DB /* AddLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F353BAC25B8366100BDB8DB /* AddLocationViewController.swift */; };
+		8F353BB825B8367F00BDB8DB /* AddLocationViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8F353BB725B8367F00BDB8DB /* AddLocationViewController.storyboard */; };
+		8F353BBD25B837F500BDB8DB /* ToastManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F353BBC25B837F500BDB8DB /* ToastManager.swift */; };
+		8F353BC225B8387C00BDB8DB /* UIApplication+BH.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F353BC125B8387C00BDB8DB /* UIApplication+BH.swift */; };
+		8F353BC725B8392F00BDB8DB /* ToasterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F353BC625B8392F00BDB8DB /* ToasterView.swift */; };
+		8F353BCC25B8394900BDB8DB /* ToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F353BCB25B8394900BDB8DB /* ToastView.swift */; };
+		8F353BD125B8396400BDB8DB /* ToastView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F353BD025B8396400BDB8DB /* ToastView.xib */; };
+		8F353BD625B839E800BDB8DB /* UIView+BH.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F353BD525B839E800BDB8DB /* UIView+BH.swift */; };
+		8F353BDB25B83CB900BDB8DB /* UISearchBar+BH.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F353BDA25B83CB900BDB8DB /* UISearchBar+BH.swift */; };
 		8F73A45725B6E8A80001E61D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F73A45625B6E8A80001E61D /* AppDelegate.swift */; };
 		8F73A45B25B6E8A80001E61D /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F73A45A25B6E8A80001E61D /* HomeViewController.swift */; };
 		8F73A45E25B6E8A80001E61D /* HomeViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8F73A45C25B6E8A80001E61D /* HomeViewController.storyboard */; };
@@ -16,6 +25,11 @@
 		8F73A46625B6E8A90001E61D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8F73A46425B6E8A90001E61D /* LaunchScreen.storyboard */; };
 		8F73A47125B6E8A90001E61D /* BHWeatherAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F73A47025B6E8A90001E61D /* BHWeatherAppTests.swift */; };
 		8F73A47C25B6E8A90001E61D /* BHWeatherAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F73A47B25B6E8A90001E61D /* BHWeatherAppUITests.swift */; };
+		8FBBB4BF25B8539D00AE5A3B /* LocationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FBBB4BD25B8539D00AE5A3B /* LocationCell.swift */; };
+		8FBBB4C025B8539D00AE5A3B /* LocationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8FBBB4BE25B8539D00AE5A3B /* LocationCell.xib */; };
+		8FBBB4C825B853EC00AE5A3B /* LocationCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FBBB4C725B853EC00AE5A3B /* LocationCellViewModel.swift */; };
+		8FBBB4D025B8553C00AE5A3B /* AddLocationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FBBB4CF25B8553C00AE5A3B /* AddLocationViewModel.swift */; };
+		8FBBB4D825B873AF00AE5A3B /* BHColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FBBB4D725B873AF00AE5A3B /* BHColor.swift */; };
 		8FF4D81725B6EAD000FD900F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FF4D81625B6EAD000FD900F /* SceneDelegate.swift */; };
 		8FF4D84B25B6F0E500FD900F /* StoryboardBased.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FF4D84A25B6F0E500FD900F /* StoryboardBased.swift */; };
 		8FF4D85425B6F1DB00FD900F /* NSObject+BH.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FF4D85325B6F1DB00FD900F /* NSObject+BH.swift */; };
@@ -48,6 +62,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8F353BAC25B8366100BDB8DB /* AddLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLocationViewController.swift; sourceTree = "<group>"; };
+		8F353BB725B8367F00BDB8DB /* AddLocationViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AddLocationViewController.storyboard; sourceTree = "<group>"; };
+		8F353BBC25B837F500BDB8DB /* ToastManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastManager.swift; sourceTree = "<group>"; };
+		8F353BC125B8387C00BDB8DB /* UIApplication+BH.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+BH.swift"; sourceTree = "<group>"; };
+		8F353BC625B8392F00BDB8DB /* ToasterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToasterView.swift; sourceTree = "<group>"; };
+		8F353BCB25B8394900BDB8DB /* ToastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastView.swift; sourceTree = "<group>"; };
+		8F353BD025B8396400BDB8DB /* ToastView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ToastView.xib; sourceTree = "<group>"; };
+		8F353BD525B839E800BDB8DB /* UIView+BH.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+BH.swift"; sourceTree = "<group>"; };
+		8F353BDA25B83CB900BDB8DB /* UISearchBar+BH.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UISearchBar+BH.swift"; sourceTree = "<group>"; };
 		8F73A45325B6E8A80001E61D /* BHWeatherApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BHWeatherApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8F73A45625B6E8A80001E61D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8F73A45A25B6E8A80001E61D /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -62,6 +85,11 @@
 		8F73A47725B6E8A90001E61D /* BHWeatherAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BHWeatherAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8F73A47B25B6E8A90001E61D /* BHWeatherAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BHWeatherAppUITests.swift; sourceTree = "<group>"; };
 		8F73A47D25B6E8A90001E61D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8FBBB4BD25B8539D00AE5A3B /* LocationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationCell.swift; sourceTree = "<group>"; };
+		8FBBB4BE25B8539D00AE5A3B /* LocationCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LocationCell.xib; sourceTree = "<group>"; };
+		8FBBB4C725B853EC00AE5A3B /* LocationCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationCellViewModel.swift; sourceTree = "<group>"; };
+		8FBBB4CF25B8553C00AE5A3B /* AddLocationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLocationViewModel.swift; sourceTree = "<group>"; };
+		8FBBB4D725B873AF00AE5A3B /* BHColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BHColor.swift; sourceTree = "<group>"; };
 		8FF4D81625B6EAD000FD900F /* SceneDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		8FF4D84A25B6F0E500FD900F /* StoryboardBased.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryboardBased.swift; sourceTree = "<group>"; };
 		8FF4D85325B6F1DB00FD900F /* NSObject+BH.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSObject+BH.swift"; sourceTree = "<group>"; };
@@ -122,6 +150,27 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		8F353BAB25B8363500BDB8DB /* AddLocationScene */ = {
+			isa = PBXGroup;
+			children = (
+				8FBBB4CF25B8553C00AE5A3B /* AddLocationViewModel.swift */,
+				8F353BAC25B8366100BDB8DB /* AddLocationViewController.swift */,
+				8F353BB725B8367F00BDB8DB /* AddLocationViewController.storyboard */,
+			);
+			path = AddLocationScene;
+			sourceTree = "<group>";
+		};
+		8F353BDF25B83CC600BDB8DB /* Toast */ = {
+			isa = PBXGroup;
+			children = (
+				8F353BBC25B837F500BDB8DB /* ToastManager.swift */,
+				8F353BC625B8392F00BDB8DB /* ToasterView.swift */,
+				8F353BCB25B8394900BDB8DB /* ToastView.swift */,
+				8F353BD025B8396400BDB8DB /* ToastView.xib */,
+			);
+			path = Toast;
+			sourceTree = "<group>";
+		};
 		8F73A44A25B6E8A80001E61D = {
 			isa = PBXGroup;
 			children = (
@@ -180,6 +229,16 @@
 			path = BHWeatherAppUITests;
 			sourceTree = "<group>";
 		};
+		8FBBB4BC25B8535E00AE5A3B /* AddLocationCell */ = {
+			isa = PBXGroup;
+			children = (
+				8FBBB4C725B853EC00AE5A3B /* LocationCellViewModel.swift */,
+				8FBBB4BD25B8539D00AE5A3B /* LocationCell.swift */,
+				8FBBB4BE25B8539D00AE5A3B /* LocationCell.xib */,
+			);
+			path = AddLocationCell;
+			sourceTree = "<group>";
+		};
 		8FF4D84925B6F0D600FD900F /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
@@ -194,6 +253,9 @@
 				8FF4D85325B6F1DB00FD900F /* NSObject+BH.swift */,
 				8FF4D86325B6F30500FD900F /* UITableView+BH.swift */,
 				8FFE89CA25B7654F009CE190 /* String+BH.swift */,
+				8F353BC125B8387C00BDB8DB /* UIApplication+BH.swift */,
+				8F353BD525B839E800BDB8DB /* UIView+BH.swift */,
+				8F353BDA25B83CB900BDB8DB /* UISearchBar+BH.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -201,6 +263,7 @@
 		8FF4D85825B6F21800FD900F /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				8F353BAB25B8363500BDB8DB /* AddLocationScene */,
 				8FF4D85925B6F22000FD900F /* HomeScene */,
 			);
 			path = Screens;
@@ -229,6 +292,7 @@
 		8FF4D85E25B6F28500FD900F /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				8F353BDF25B83CC600BDB8DB /* Toast */,
 				8FF4D85F25B6F28B00FD900F /* Cells */,
 			);
 			path = UI;
@@ -237,6 +301,7 @@
 		8FF4D85F25B6F28B00FD900F /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				8FBBB4BC25B8535E00AE5A3B /* AddLocationCell */,
 				8FFE89B125B7545C009CE190 /* HomeCell */,
 			);
 			path = Cells;
@@ -254,6 +319,7 @@
 			isa = PBXGroup;
 			children = (
 				8FF4D87B25B6F53600FD900F /* BHFont.swift */,
+				8FBBB4D725B873AF00AE5A3B /* BHColor.swift */,
 			);
 			path = Fonts;
 			sourceTree = "<group>";
@@ -374,7 +440,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8F353BB825B8367F00BDB8DB /* AddLocationViewController.storyboard in Resources */,
 				8FFE89BE25B764A5009CE190 /* Localizable.strings in Resources */,
+				8FBBB4C025B8539D00AE5A3B /* LocationCell.xib in Resources */,
+				8F353BD125B8396400BDB8DB /* ToastView.xib in Resources */,
 				8F73A46625B6E8A90001E61D /* LaunchScreen.storyboard in Resources */,
 				8FF4D87625B6F3DF00FD900F /* HomeWeatherCell.xib in Resources */,
 				8F73A46325B6E8A90001E61D /* Assets.xcassets in Resources */,
@@ -463,18 +532,29 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8F353BBD25B837F500BDB8DB /* ToastManager.swift in Sources */,
+				8FBBB4D825B873AF00AE5A3B /* BHColor.swift in Sources */,
 				8F73A46125B6E8A80001E61D /* BHWeatherApp.xcdatamodeld in Sources */,
 				8FF4D87525B6F3DF00FD900F /* HomeWeatherCell.swift in Sources */,
 				8F73A45B25B6E8A80001E61D /* HomeViewController.swift in Sources */,
+				8F353BAD25B8366100BDB8DB /* AddLocationViewController.swift in Sources */,
+				8F353BC725B8392F00BDB8DB /* ToasterView.swift in Sources */,
 				8FF4D88825B6FB4D00FD900F /* HomeViewModel.swift in Sources */,
 				8F73A45725B6E8A80001E61D /* AppDelegate.swift in Sources */,
 				8FF4D84B25B6F0E500FD900F /* StoryboardBased.swift in Sources */,
+				8FBBB4D025B8553C00AE5A3B /* AddLocationViewModel.swift in Sources */,
+				8F353BC225B8387C00BDB8DB /* UIApplication+BH.swift in Sources */,
 				8FF4D87C25B6F53600FD900F /* BHFont.swift in Sources */,
+				8FBBB4C825B853EC00AE5A3B /* LocationCellViewModel.swift in Sources */,
 				8FF4D81725B6EAD000FD900F /* SceneDelegate.swift in Sources */,
 				8FFE89B325B7548C009CE190 /* HomeWeatherCellViewModel.swift in Sources */,
 				8FFE89CB25B7654F009CE190 /* String+BH.swift in Sources */,
 				8FF4D86425B6F30500FD900F /* UITableView+BH.swift in Sources */,
 				8FFE89C625B764F6009CE190 /* BHText.swift in Sources */,
+				8F353BCC25B8394900BDB8DB /* ToastView.swift in Sources */,
+				8F353BDB25B83CB900BDB8DB /* UISearchBar+BH.swift in Sources */,
+				8FBBB4BF25B8539D00AE5A3B /* LocationCell.swift in Sources */,
+				8F353BD625B839E800BDB8DB /* UIView+BH.swift in Sources */,
 				8FF4D85425B6F1DB00FD900F /* NSObject+BH.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
