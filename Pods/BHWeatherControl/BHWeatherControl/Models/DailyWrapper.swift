@@ -7,6 +7,7 @@
 
 import UIKit
 
+// DailyWrapper is a simple object created from Daily Object
 public struct DailyWrapper {
     
     public var dailyDate: Int?
@@ -54,6 +55,10 @@ public struct DailyWrapper {
         }
         self.uvi = daily.uvi
     }
+    
+}
+
+extension DailyWrapper {
     
     public var image: UIImage? {
         return UIImage(named: self.icon ?? "")

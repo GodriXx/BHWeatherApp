@@ -9,6 +9,7 @@ import Foundation
 
 struct BaseConfig {
     
+    //get appID (OpenWeatherMap token) from info.plist in client app
     static var appID: String? {
         if let path = Bundle.main.path(forResource: "Info",
                                        ofType: "plist"),

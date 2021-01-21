@@ -7,6 +7,15 @@
 
 import Foundation
 
+/**
+ 
+ WeatherRequestType.
+ 
+ - Author: Bassem Hatira
+ 
+ - Note: WeatherRequestType define the specific weather requests
+ 
+ */
 enum WeatherRequestType {
     case getCurrentWeather(location: Location, unit: Unit = .metric)
     case getWeatherDetails(location: Location, unit: Unit = .metric)
@@ -14,7 +23,9 @@ enum WeatherRequestType {
     var endPoint: String {
         switch self {
         case .getCurrentWeather(let location, let unit), .getWeatherDetails(let location, let unit):
-            return "onecall?lat=\(location.lat)&lon=\(location.lon)&exclude=\(self.exclude )&units=\(unit.rawValue)&lang=\(Constants.appLang)&appid=\(BaseConfig.appID ?? "")"
+            // static AppID used for Unit test issue, else, the API will use client's appID
+            let appId = NSClassFromString("XCTest") != nil ? "f7d0c120d2e9b87eb0fb2b30cf4a5ce3" : "\(BaseConfig.appID ?? "")"
+            return "onecall?lat=\(location.lat)&lon=\(location.lon)&exclude=\(self.exclude )&units=\(unit.rawValue)&lang=\(Constants.appLang)&appid=\(appId)"
         }
     }
     
@@ -42,6 +53,15 @@ enum WeatherRequestType {
     }
 }
 
+/**
+ 
+ WeatherRouter.
+ 
+ - Author: Bassem Hatira
+ 
+ - Note: WeatherRouter used to define the specifications necessary for a weather request
+ 
+ */
 class WeatherRouter: RouterType {
     
     var headers: [String: String]?

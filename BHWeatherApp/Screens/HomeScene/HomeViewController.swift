@@ -38,6 +38,7 @@ class HomeViewController: UIViewController, StoryboardBased {
         
         let add = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(goToAddLocation))
         navigationItem.rightBarButtonItem = add
+        add.accessibilityIdentifier = "xctest--btnAdd"
         
         self.lblEmpty.text = BHText.home_empty.value
     }
@@ -52,6 +53,7 @@ class HomeViewController: UIViewController, StoryboardBased {
     }
     
     private func setupTableView() {
+        self.tableView.accessibilityIdentifier = "xctest--homeTableView"
         self.tableView.registerCell(name: HomeWeatherCell.className)
         self.tableView.separatorStyle = .none
     }

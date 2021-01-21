@@ -15,27 +15,27 @@ extension Date {
     
     //get time from timezone
     func getCurrentTime(timezoneOffset: Int) -> String {
-
+        
         let format = DateFormatter()
-
+        
         format.timeZone = TimeZone(secondsFromGMT: timezoneOffset)
-       
+        
         format.dateFormat = DateFormat.timeFormat
-
+        
         return format.string(from: self)
     }
     
     //get day name of week
     var dayNameFromTimezone: String {
-
+        
         let format = DateFormatter()
-
+        
         format.timeZone = .current
         
         format.locale = Locale(identifier: Constants.appLang)
         
         format.dateFormat = DateFormat.dayNameFormat
-
+        
         return format.string(from: self).capitalized
     }
 }
