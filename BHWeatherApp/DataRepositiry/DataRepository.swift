@@ -40,12 +40,12 @@ class DataRepository: DataRepositoryProtocol {
     
     func getWeatherDetails(location: Location,
                            onCompleted: @escaping (WeatherWrapper?) -> Void) {
-        self.weatherProvider.getWeatherDetails(location: location) { (weathers) in
-            onCompleted(weathers)
+        self.weatherProvider.getWeatherDetails(location: location) { (weather) in
+            onCompleted(weather)
         } onError: { (error) in
             onCompleted(nil)
         }
-
+        
     }
     
     func getWeatherModels(onCompleted: @escaping ([WeatherModel]) -> Void) {

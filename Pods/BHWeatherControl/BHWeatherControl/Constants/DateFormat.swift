@@ -9,8 +9,8 @@ import Foundation
 
 struct DateFormat {
     
-    static let timeFormat = "HH:mm"
-    static let dayNameFormat = "EEEE"
+    static let timeFormat = "HH:mm" //20:36
+    static let dayNameFormat = "EEEE" //Monday
 }
 
 

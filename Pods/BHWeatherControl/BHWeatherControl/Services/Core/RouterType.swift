@@ -7,6 +7,15 @@
 
 import Foundation
 
+/**
+ 
+ RouterType.
+ 
+ - Author: Bassem Hatira
+ 
+ - Note: RouterType is a protocol which allows the communication of specific informations for a web services call to the class responsible
+ 
+ */
 protocol RouterType {
     
     // The headers to be used in the request.

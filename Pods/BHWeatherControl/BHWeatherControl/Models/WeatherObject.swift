@@ -8,6 +8,8 @@
 import Foundation
 
 struct WeatherObject: Codable {
+    let lon: Double?
+    let lat: Double?
     let timezone: String?
     let timezoneOffset: Int?
     let current: Current?
@@ -15,7 +17,7 @@ struct WeatherObject: Codable {
     
     enum CodingKeys : String, CodingKey {
         case timezoneOffset = "timezone_offset"
-        case timezone, current, daily
+        case timezone, current, daily, lon, lat
     }
     
     func getWeatherWrapper() -> WeatherWrapper {

@@ -54,6 +54,8 @@ class AddLocationViewController: UIViewController, StoryboardBased {
         self.searchBar.placeholder = BHText.location_placeholder.value
         self.searchBar.becomeFirstResponder()
         
+        self.searchBar.accessibilityIdentifier = "xctest--searchBar"
+        
         self.lblTitle.text = BHText.location_title.value
         
         self.setupTableView()
@@ -65,6 +67,7 @@ class AddLocationViewController: UIViewController, StoryboardBased {
     }
     
     private func setupTableView() {
+        self.tableView.accessibilityIdentifier = "xctest--addTableView"
         self.tableView.registerCell(name: LocationCell.className)
         self.tableView.separatorStyle = .none
         self.tableView.delegate = self
