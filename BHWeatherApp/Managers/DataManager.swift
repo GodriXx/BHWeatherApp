@@ -23,7 +23,8 @@ class DataManager {
     }
     
     //Save Data
-    func saveWeatherLocation(weatherModel: WeatherModel) {
+    func saveWeatherLocation(weatherModel: WeatherModel,
+                             onCompletion: @escaping(Bool) -> Void) {
         
         guard let managedContext = self.managedContext else { return }
         let entity =
@@ -37,12 +38,15 @@ class DataManager {
         location.setValue(weatherModel.citySubtitle, forKeyPath: "citySubtitle")
         location.setValue(weatherModel.latitude, forKeyPath: "latitude")
         location.setValue(weatherModel.longitude, forKeyPath: "longitude")
+        location.setValue(weatherModel.currentTime, forKeyPath: "currentTime")
+        location.setValue(weatherModel.temperature, forKeyPath: "temperature")
+        location.setValue(weatherModel.icon, forKeyPath: "icon")
         
         do {
             try managedContext.save()
-            //people.append(location)
-        } catch let error as NSError {
-            print("Could not save. \(error), \(error.userInfo)")
+            onCompletion(true)
+        } catch _ as NSError {
+            onCompletion(false)
         }
     }
     
@@ -55,18 +59,14 @@ class DataManager {
         do {
             weatherLocations = try managedContext.fetch(fetchRequest)
             return getWeatherModels(weatherLocations: weatherLocations)
-        } catch let error as NSError {
-            print("Could not fetch. \(error), \(error.userInfo)")
+        } catch _ as NSError {
             return []
         }
     }
     
     func getWeatherModels(weatherLocations: [NSManagedObject]) -> [WeatherModel] {
         return weatherLocations.map { (weatherLocation) -> WeatherModel in
-            return WeatherModel(cityName: (weatherLocation.value(forKeyPath: "cityName") as? String),
-                                citySubtitle: (weatherLocation.value(forKeyPath: "citySubtitle") as? String),
-                                longitude: (weatherLocation.value(forKeyPath: "longitude") as? String),
-                                latitude: (weatherLocation.value(forKeyPath: "latitude") as? String))
+            return WeatherModel(dbObject: weatherLocation)
         }
     }
     
@@ -76,15 +76,14 @@ class DataManager {
         
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "WeatherLocation")
         fetchRequest.predicate = NSPredicate(format: "cityName = %@", cityName as CVarArg)
-
+        
         var entitiesCount = 0
-
+        
         do {
             entitiesCount = try managedContext.count(for: fetchRequest)
             return entitiesCount > 0
         }
         catch {
-            print("error executing fetch request: \(error)")
             return false
         }
     }
@@ -109,15 +108,48 @@ class DataManager {
                 onCompletion(true)
             }
             catch {
-                print(error)
                 onCompletion(false)
             }
             
         }
         catch {
-            print(error)
             onCompletion(false)
         }
     }
+    
+    func updateWeather(weatherModel: WeatherModel,
+                       onCompletion: @escaping(Bool) -> Void) {
+        
+        guard let managedContext = self.managedContext else { return }
+        
+        let fetchRequest =
+            NSFetchRequest<NSManagedObject>(entityName: "WeatherLocation")
+        
+        let predicate = NSPredicate(format: "cityName = %@", (weatherModel.cityName ?? ""))
+        fetchRequest.predicate = predicate
+        
+        do {
+            let results = try managedContext.fetch(fetchRequest)
+            
+            // begin update
+            let managedObject = results[0]
+            managedObject.setValue(weatherModel.citySubtitle, forKeyPath: "citySubtitle")
+            managedObject.setValue(weatherModel.currentTime, forKeyPath: "currentTime")
+            managedObject.setValue(weatherModel.temperature, forKeyPath: "temperature")
+            managedObject.setValue(weatherModel.icon, forKeyPath: "icon")
+            do {
+                try managedContext.save()
+                onCompletion(true)
+            }
+            catch {
+                onCompletion(false)
+            }
+            
+        } catch _ as NSError {
+            onCompletion(false)
+        }
+        //end update
+    }
+    
     
 }

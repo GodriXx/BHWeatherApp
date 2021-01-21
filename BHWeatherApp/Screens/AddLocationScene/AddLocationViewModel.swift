@@ -12,10 +12,13 @@ class AddLocationViewModel: NSObject {
     
     weak var view: AddLocationProtocol?
     
+    private var dataRepo: DataRepositoryProtocol = DataRepository()
+    
     var locationCells: [LocationCellViewModel]? {
         didSet {
-            guard let locationCells = locationCells else { return }
-            view?.update(with: locationCells)
+            guard let locationCells = locationCells,
+                  let view = self.view else { return }
+            view.update(with: locationCells)
         }
     }
     
@@ -37,23 +40,27 @@ class AddLocationViewModel: NSObject {
         let search = MKLocalSearch(request: searchRequest)
         
         search.start { (response, error) in
-            guard let _ = error else {
+            if error == nil {
                 guard let coordinate = response?.mapItems[0].placemark.coordinate else {
                     onCompletion(false)
                     return
                 }
-                if !DataManager.shared.isWeatherExist(cityName: location.strCity ?? "") {
+                
+                if !self.dataRepo.isWeatherExist(cityName: location.strCity ?? "") {
                     let weatherModel = WeatherModel(cityName: location.strCity,
                                                     citySubtitle: location.strRegion,
                                                     coordinate: coordinate)
-                    DataManager.shared.saveWeatherLocation(weatherModel: weatherModel)
-                    onCompletion(true)
+                    
+                    self.dataRepo.saveWeather(weatherModel: weatherModel) { (status) in
+                        onCompletion(status)
+                    }
+                    
                 } else {
                     onCompletion(false)
                 }
-                return
+            } else {
+                onCompletion(false)
             }
-            return onCompletion(false)
         }
     }
     
@@ -68,7 +75,5 @@ extension AddLocationViewModel: MKLocalSearchCompleterDelegate {
             return LocationCellViewModel(mkLocation: mkLocation)
         }
         
-        // Reload the tableview with our new searchResults
-        print(completer.results)
     }
 }

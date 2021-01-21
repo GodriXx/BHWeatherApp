@@ -9,46 +9,70 @@ import Foundation
 import BHWeatherControl
 
 class HomeViewModel {
+        
+    private var dataRepo: DataRepositoryProtocol
     
-    private var weatherProvider = WeatherProvider.shared
-    
-    var homeWeatherCell: [HomeWeatherCellViewModel]?
+    private var homeWeatherCellViewModels: [HomeWeatherCellViewModel]?
     var weatherModels: [WeatherModel] = []
     
-    func getHomeWeathers(onSuccess: @escaping([HomeWeatherCellViewModel]) -> Void,
-                         onError: @escaping(Error) -> Void) {
+    init(dataRepo: DataRepositoryProtocol = DataRepository()) {
+        self.dataRepo = dataRepo
+    }
+    
+    func getHomeWeatherModels(onCompleted: @escaping([WeatherModel]) -> Void) {
         
-        self.weatherModels = DataManager.shared.getWeatherLocation()
-        
-        let locations = weatherModels.map { (weatherModel) -> Location in
-            return Location(lat: weatherModel.latitude ?? "", lon: weatherModel.longitude ?? "")
-        }
-        
-        weatherProvider.getCurrentWeathers(locations: locations) { (weathers) in
-            guard let weathers = weathers else {
-                onError(NSError())
-                return
+        self.dataRepo.getWeatherModels { (weatherModels) in
+            
+            self.weatherModels = weatherModels
+            
+            let locations = weatherModels.map { (weatherModel) -> Location in
+                return Location(lat: weatherModel.latitude ?? "", lon: weatherModel.longitude ?? "")
             }
             
-            for weather in weathers {
-                for weatherModel in self.weatherModels where weatherModel.compareLocation(lon: weather.longitude ?? "", lat: weather.latitude ?? "") {
-                    weatherModel.updateDataFrom(weather: weather)
+            self.dataRepo.getCurrentWeathers(locations: locations) { (weathers) in
+                guard let weathers = weathers else {
+                    //if no api response (offline) (return weatherModels from data base)
+                    onCompleted(self.weatherModels)
+                    return
                 }
+                
+                for weather in weathers {
+                    for weatherModel in self.weatherModels where weatherModel.compareLocation(lon: weather.longitude ?? "", lat: weather.latitude ?? "") {
+                        weatherModel.updateDataFrom(weather: weather)
+                        self.dataRepo.updateWeather(weatherModel: weatherModel) { (status) in
+                            //data up to date
+                        }
+                    }
+                }
+                
+                
+                // after update data in weather models
+                // (return weatherModels from api)
+                onCompleted(self.weatherModels)
             }
             
-            self.homeWeatherCell = self.weatherModels.map({ (weatherModel) -> HomeWeatherCellViewModel in
-                return HomeWeatherCellViewModel(weatherModel: weatherModel)
-            })
-            onSuccess(self.homeWeatherCell ?? [])
-        } onError: { (error) in
-            print(error ?? "")
+            
         }
+    }
+    
+    func getHomeWeatherCellViewModel(onCompleted: @escaping([HomeWeatherCellViewModel]) -> Void) {
+            
+            self.getHomeWeatherModels { (weatherModels) in
+                
+                self.homeWeatherCellViewModels = self.weatherModels.map({ (weatherModel) -> HomeWeatherCellViewModel in
+                    return HomeWeatherCellViewModel(weatherModel: weatherModel)
+                })
+                
+                onCompleted(self.homeWeatherCellViewModels ?? [])
+                
+            }
+                    
     }
     
     func removeWeather(index: Int,
                        onCompletion: @escaping(Bool) -> Void) {
-        //DataManager.deleteData(weather: weatherModels[indexPath.row])
-        DataManager.shared.removeWeatherLocation(weatherModel: self.weatherModels[index]) { (status) in
+        
+        self.dataRepo.removeWeather(weatherModel: self.weatherModels[index]) { (status) in
             if status {
                 self.weatherModels.remove(at: index)
                 onCompletion(true)

@@ -16,9 +16,8 @@ class HomeWeatherCellViewModel {
     
     init(weatherModel: WeatherModel) {
         self.strTime = weatherModel.currentTime
-        //TODO: update location Name
         self.strLocation = weatherModel.cityName
-        self.strTemp = String(Int(weatherModel.temperature ?? 0.0))
+        self.strTemp = weatherModel.temperatureStr
         self.imgWeather = weatherModel.image
     }
     
