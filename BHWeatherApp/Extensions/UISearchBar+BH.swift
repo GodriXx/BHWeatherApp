@@ -23,7 +23,7 @@ extension UISearchBar {
     
     func setTextFieldFont() {
         if let textField = getTextField() {
-            textField.font = BHFont.title.defaultValue
+            textField.font = BHFont.title1.defaultValue
         }
     }
 }

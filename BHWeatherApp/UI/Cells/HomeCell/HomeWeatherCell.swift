@@ -26,7 +26,7 @@ class HomeWeatherCell: UITableViewCell {
         self.accessibilityIdentifier = "weatherCell"
         //setup fonts
         self.lblTemp.font = BHFont.caption1.defaultValue
-        self.lblLocation.font = BHFont.title.defaultValue
+        self.lblLocation.font = BHFont.title1.defaultValue
         self.lblTime.font = BHFont.body1.defaultValue
         //setup data
         guard let viewModel = self.viewModel else { return }

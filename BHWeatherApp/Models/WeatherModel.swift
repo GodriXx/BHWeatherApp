@@ -8,6 +8,7 @@
 import UIKit
 import MapKit
 import BHWeatherControl
+import CoreData
 
 class WeatherModel {
     
@@ -23,8 +24,24 @@ class WeatherModel {
     var icon: String?
     var days: [DailyModel]?
     var currentTime: String?
+    var dayDate: Int?
+    var feelsLike: Double?
+    var pressure: Double?
+    var humidity: Int?
+    var uvi: Double?
+    var visibility: Int?
+    var windSpeed: Double?
+    var windDeg: Int?
+    var sunriseTime: String?
+    var sunsetTime: String?
+    
     var image: UIImage? {
         return UIImage(named: self.icon ?? "")
+    }
+    
+    var temperatureStr: String {
+        guard let temperature = self.temperature else { return "" }
+        return String(format: "%.0f", round(temperature)) + BHText.general_temp.value
     }
     
     init(cityName: String? = "", citySubtitle: String? = "", coordinate: CLLocationCoordinate2D) {
@@ -40,14 +57,35 @@ class WeatherModel {
     }
     
     func updateDataFrom(weather: WeatherWrapper) {
+        
         self.timezoneName = weather.timezoneName
         self.timezoneOffset = weather.timezoneOffset
         self.temperature = weather.temperature
         self.status = weather.status
         self.description = weather.description
         self.icon = weather.icon
-        //self.days = weather.days
         self.currentTime = weather.currentTime
+        
+        self.dayDate = weather.dayDate
+        self.feelsLike = weather.feelsLike
+        self.pressure = weather.pressure
+        self.humidity = weather.humidity
+        self.uvi = weather.uvi
+        self.visibility = weather.visibility
+        self.windSpeed = weather.windSpeed
+        self.windDeg = weather.windDeg
+        self.sunriseTime = weather.sunriseTime
+        self.sunsetTime = weather.sunsetTime
+        
+        guard let weatherDays = weather.days else { return }
+        self.days = weatherDays.map({ (dailyWrapper) -> DailyModel in
+            return DailyModel(min: dailyWrapper.min,
+                              max: dailyWrapper.max,
+                              dayName: dailyWrapper.dayName,
+                              icon: dailyWrapper.icon,
+                              feelsLike: dailyWrapper.feelsLike)
+        })
+        
     }
     
     func compareLocation(lon: String, lat: String) -> Bool {
@@ -59,4 +97,15 @@ class WeatherModel {
         
         return (lon1 == lon2) && (lat1 == lat2)
     }
+    
+    init(dbObject: NSManagedObject) {
+        self.temperature = dbObject.value(forKeyPath: "temperature") as? Double
+        self.icon = dbObject.value(forKeyPath: "icon") as? String
+        self.currentTime = dbObject.value(forKeyPath: "currentTime") as? String
+        self.citySubtitle = dbObject.value(forKeyPath: "citySubtitle") as? String
+        self.cityName = dbObject.value(forKeyPath: "cityName") as? String
+        self.latitude = dbObject.value(forKeyPath: "latitude") as? String
+        self.longitude = dbObject.value(forKeyPath: "longitude") as? String
+    }
+    
 }

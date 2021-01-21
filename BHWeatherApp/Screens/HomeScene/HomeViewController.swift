@@ -18,7 +18,7 @@ class HomeViewController: UIViewController, StoryboardBased {
     @IBOutlet weak var lblEmpty: UILabel!
     @IBOutlet weak var loader: UIActivityIndicatorView!
     
-    var viewModel: HomeViewModel = HomeViewModel()
+    private var viewModel: HomeViewModel = HomeViewModel()
     
     private var cellViewModels: [HomeWeatherCellViewModel]? {
         didSet {
@@ -44,12 +44,10 @@ class HomeViewController: UIViewController, StoryboardBased {
         
     private func getWeatherData() {
         self.loader.startAnimating()
-        self.viewModel.getHomeWeathers { (homeWeatherCellViewModels) in
+        self.viewModel.getHomeWeatherCellViewModel { (homeWeatherCellViewModels) in
             self.loader.stopAnimating()
             self.tableView.isHidden = homeWeatherCellViewModels.isEmpty
             self.cellViewModels = homeWeatherCellViewModels
-        } onError: { (error) in
-            //TODO: manage error
         }
     }
     
@@ -90,7 +88,10 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //TODO: Go to detail weather
+        let detailsVC = DetailsViewController.instanciate()
+        
+        detailsVC.viewModel = DetailsViewModel(weatherModel: self.viewModel.weatherModels[indexPath.row])
+        self.show(detailsVC, sender: nil)
     }
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
