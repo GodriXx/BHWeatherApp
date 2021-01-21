@@ -1,0 +1,21 @@
+PODS:
+  - BHWeatherControl (1.2.0)
+
+DEPENDENCIES:
+  - BHWeatherControl (from `https://github.com/GodriXx/BHWeatherControl.git`)
+
+EXTERNAL SOURCES:
+  BHWeatherControl:
+    :git: https://github.com/GodriXx/BHWeatherControl.git
+
+CHECKOUT OPTIONS:
+  BHWeatherControl:
+    :commit: 71d71ea69287283afd69ded5673264e4fcce6bae
+    :git: https://github.com/GodriXx/BHWeatherControl.git
+
+SPEC CHECKSUMS:
+  BHWeatherControl: 63547bc69cce2b67bff3fc450aec9a3400ff8e66
+
+PODFILE CHECKSUM: 589c0d7b1e3c93285ed96ef56ff566ff7597b8c6
+
+COCOAPODS: 1.8.3

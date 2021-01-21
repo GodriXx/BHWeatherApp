@@ -1,0 +1,29 @@
+/* 
+  Localizable.strings
+  BHWeatherApp
+
+  Created by Bassem Hatira on 19/01/2021.
+  
+*/
+
+//Mark: General
+"general_temp"              =   "°";
+
+//Mark: Home
+"home_title"                =   "Home";
+"home_empty"                =   "No data, please add new locations 🙏🏻";
+
+//Mark: Add location
+"location_title"            =   "Add location";
+"location_placeholder"      =   "Search location";
+
+//Mark: Details
+"details_title"             =   "Details";
+"details_sunrise"           =   "SUNRISE";
+"details_sunset"            =   "SUNSET";
+"details_humidity"          =   "HUMIDITY";
+"details_windspeed"         =   "WIND SPEED";
+
+//Mark: errors
+"wrong_data"                =   "Please, you need to tap at least two letters to begin search";
+"already_exist"             =   "This location already exist !";

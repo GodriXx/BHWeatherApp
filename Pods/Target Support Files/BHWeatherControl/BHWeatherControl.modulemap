@@ -1,0 +1,6 @@
+framework module BHWeatherControl {
+  umbrella header "BHWeatherControl-umbrella.h"
+
+  export *
+  module * { export * }
+}

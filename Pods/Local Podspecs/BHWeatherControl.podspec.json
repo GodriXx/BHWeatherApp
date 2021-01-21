@@ -1,0 +1,22 @@
+{
+  "name": "BHWeatherControl",
+  "version": "1.2.0",
+  "summary": "An API to get weather instantly according to location",
+  "description": "The Weather Control is a simple library to make getting weather easier for ASP",
+  "homepage": "https://github.com/GodriXx/BHWeatherControl/blob/master/README.md",
+  "license": "MIT",
+  "authors": {
+    "Bassem Hatira": "bassem.hatira@gmail.com"
+  },
+  "platforms": {
+    "ios": "11.0"
+  },
+  "source": {
+    "git": "https://github.com/GodriXx/BHWeatherControl.git",
+    "tag": "1.2.0"
+  },
+  "source_files": "BHWeatherControl/**/*",
+  "exclude_files": "BHWeatherControl/Info.plist",
+  "swift_versions": "5.0",
+  "swift_version": "5.0"
+}
