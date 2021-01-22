@@ -9,8 +9,10 @@ import UIKit
 
 class DetailsViewController: UIViewController, StoryboardBased {
     
+    // Outlets
     @IBOutlet weak var tableView: UITableView!
     
+    // Variables
     var viewModel: DetailsViewModel?
     
     override func viewDidLoad() {
@@ -52,23 +54,21 @@ class DetailsViewController: UIViewController, StoryboardBased {
 
 }
 
+// TableView protocols
 extension DetailsViewController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return 4
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 0 || section == 2 {
-            return 1
-        } else  if section == 1 {
+        if section == 1 {
             guard let viewModel = self.viewModel,
                   let weatherModel = viewModel.weatherModel,
                   let days = weatherModel.days else { return 0 }
             return days.count
-        } else if section == 3 {
+        } else {
             return 1
         }
-        return 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

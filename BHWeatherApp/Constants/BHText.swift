@@ -7,6 +7,7 @@
 
 import Foundation
 
+// enum contains all app strings enumarated, this allow us to get rid of strings in the code
 enum BHText: String {
     
     //Mark: General
@@ -29,7 +30,8 @@ enum BHText: String {
     
     //Mark: Error messages
     case wrong_data,
-         already_exist
+         already_exist,
+         no_connection
     
     var value: String {
         return self.rawValue.localized

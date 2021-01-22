@@ -48,6 +48,7 @@ class BHWeatherAppUITests: XCTestCase {
         waitForExpectations(timeout: 30, handler: nil)
         addCell.tap()
         
+        
         // Select first element in home screen to display details
         let homeTableView = app.tables["xctest--homeTableView"]
         let homeCells = homeTableView.cells

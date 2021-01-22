@@ -22,13 +22,15 @@ class DailyCell: UITableViewCell {
     }
     
     private func setupUI() {
+        self.selectionStyle = .none
         
+        //setup fonts
         self.lblDay.font = BHFont.body1.defaultValue
         self.lblPrediction.font = BHFont.body2.defaultValue
         self.lblMax.font = BHFont.body2.defaultValue
         self.lblMin.font = BHFont.body2.defaultValue
         
-        self.selectionStyle = .none
+        //setup data
         guard let viewModel = self.viewModel,
               let dailyModel = viewModel.dailyModel else { return }
         self.lblDay.text = dailyModel.dayName

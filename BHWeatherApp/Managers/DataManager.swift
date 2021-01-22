@@ -8,6 +8,7 @@
 import UIKit
 import CoreData
 
+//DataManager class give access to weather local storage methods
 class DataManager {
     
     static let shared = DataManager()
@@ -15,6 +16,7 @@ class DataManager {
     private var managedContext: NSManagedObjectContext?
     
     private init() {
+        //initialise managedContext
         guard let appDelegate =
                 UIApplication.shared.delegate as? AppDelegate else {
             return
@@ -27,25 +29,40 @@ class DataManager {
                              onCompletion: @escaping(Bool) -> Void) {
         
         guard let managedContext = self.managedContext else { return }
-        let entity =
-            NSEntityDescription.entity(forEntityName: "WeatherLocation",
-                                       in: managedContext)!
         
-        let location = NSManagedObject(entity: entity,
-                                       insertInto: managedContext)
+        let weatherMO = WeatherLocationMO(context: managedContext)
+        let dayMO = DailyLocationMO(context: managedContext)
         
-        location.setValue(weatherModel.cityName, forKeyPath: "cityName")
-        location.setValue(weatherModel.citySubtitle, forKeyPath: "citySubtitle")
-        location.setValue(weatherModel.latitude, forKeyPath: "latitude")
-        location.setValue(weatherModel.longitude, forKeyPath: "longitude")
-        location.setValue(weatherModel.currentTime, forKeyPath: "currentTime")
-        location.setValue(weatherModel.temperature, forKeyPath: "temperature")
-        location.setValue(weatherModel.icon, forKeyPath: "icon")
+        weatherMO.cityName = weatherModel.cityName
+        weatherMO.citySubtitle = weatherModel.citySubtitle
+        weatherMO.latitude = weatherModel.latitude
+        weatherMO.longitude = weatherModel.longitude
+        weatherMO.currentTime = weatherModel.currentTime
+        weatherMO.temperature = weatherModel.temperature ?? 0.0
+        weatherMO.icon = weatherModel.icon
+        weatherMO.sunsetTime = weatherModel.sunsetTime
+        weatherMO.sunriseTime = weatherModel.sunriseTime
+        weatherMO.humidity = Int16(weatherModel.humidity ?? 0)
+        weatherMO.windSpeed = weatherModel.windSpeed ?? 0.0
+        weatherMO.desc = weatherModel.description
+        
+        if let days = weatherModel.days {
+            for day in days {
+                dayMO.dayName = day.dayName
+                dayMO.icon = day.icon
+                dayMO.feelsLike = day.feelsLike ?? 0.0
+                dayMO.max = day.max ?? 0.0
+                dayMO.min = day.min ?? 0.0
+                weatherMO.addToDays(dayMO)
+            }
+        }
         
         do {
             try managedContext.save()
+            //handle response
             onCompletion(true)
         } catch _ as NSError {
+            //handle response
             onCompletion(false)
         }
     }
@@ -58,15 +75,17 @@ class DataManager {
         let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "WeatherLocation")
         do {
             weatherLocations = try managedContext.fetch(fetchRequest)
-            return getWeatherModels(weatherLocations: weatherLocations)
+            let weatherMO = weatherLocations as? [WeatherLocationMO] ??  []
+            return getWeatherModels(weatherLocations: weatherMO)
         } catch _ as NSError {
             return []
         }
     }
     
-    func getWeatherModels(weatherLocations: [NSManagedObject]) -> [WeatherModel] {
+    //adapt [WeatherLocationMO] to [WeatherModel]
+    func getWeatherModels(weatherLocations: [WeatherLocationMO]) -> [WeatherModel] {
         return weatherLocations.map { (weatherLocation) -> WeatherModel in
-            return WeatherModel(dbObject: weatherLocation)
+            return WeatherModel(weatherLocation: weatherLocation)
         }
     }
     
@@ -117,6 +136,7 @@ class DataManager {
         }
     }
     
+    //update data
     func updateWeather(weatherModel: WeatherModel,
                        onCompletion: @escaping(Bool) -> Void) {
         
@@ -132,11 +152,40 @@ class DataManager {
             let results = try managedContext.fetch(fetchRequest)
             
             // begin update
-            let managedObject = results[0]
-            managedObject.setValue(weatherModel.citySubtitle, forKeyPath: "citySubtitle")
-            managedObject.setValue(weatherModel.currentTime, forKeyPath: "currentTime")
-            managedObject.setValue(weatherModel.temperature, forKeyPath: "temperature")
-            managedObject.setValue(weatherModel.icon, forKeyPath: "icon")
+            guard let weatherMO = results[0] as? WeatherLocationMO else {
+                onCompletion(false)
+                return
+            }
+            weatherMO.cityName = weatherModel.cityName
+            weatherMO.citySubtitle = weatherModel.citySubtitle
+            weatherMO.latitude = weatherModel.latitude
+            weatherMO.longitude = weatherModel.longitude
+            weatherMO.currentTime = weatherModel.currentTime
+            weatherMO.temperature = weatherModel.temperature ?? 0.0
+            weatherMO.icon = weatherModel.icon
+            weatherMO.sunsetTime = weatherModel.sunsetTime
+            weatherMO.sunriseTime = weatherModel.sunriseTime
+            weatherMO.humidity = Int16(weatherModel.humidity ?? 0)
+            weatherMO.windSpeed = weatherModel.windSpeed ?? 0.0
+            weatherMO.desc = weatherModel.description
+        
+            if let daysMO = weatherMO.days, daysMO.count > 0 {
+                weatherMO.removeFromDays(daysMO)
+            }
+            
+            if let days = weatherModel.days {
+             
+                for day in days {
+                    let dayMO = DailyLocationMO(context: managedContext)
+                    dayMO.dayName = day.dayName
+                    dayMO.icon = day.icon
+                    dayMO.feelsLike = day.feelsLike ?? 0.0
+                    dayMO.max = day.max ?? 0.0
+                    dayMO.min = day.min ?? 0.0
+                    weatherMO.addToDays(dayMO)
+                }
+            }
+            
             do {
                 try managedContext.save()
                 onCompletion(true)

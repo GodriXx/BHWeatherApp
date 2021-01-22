@@ -7,6 +7,7 @@
 
 import UIKit
 
+// enum contains all colors used in app
 enum BHColor {
     case lightGray
     

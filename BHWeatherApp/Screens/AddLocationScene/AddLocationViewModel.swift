@@ -68,6 +68,10 @@ class AddLocationViewModel: NSObject {
 
 extension AddLocationViewModel: MKLocalSearchCompleterDelegate {
     
+    func completer(_ completer: MKLocalSearchCompleter, didFailWithError error: Error) {
+        self.view?.handleError(error: error)
+    }
+    
     func completerDidUpdateResults(_ completer: MKLocalSearchCompleter) {
         
         // Setting our searcResults variable to the results that the searchCompleter returned

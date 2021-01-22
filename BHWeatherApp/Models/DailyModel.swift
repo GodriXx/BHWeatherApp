@@ -8,6 +8,7 @@
 import UIKit
 import BHWeatherControl
 
+// daily adapter
 struct DailyModel {
     
     var dailyDate: Int?
@@ -57,6 +58,14 @@ struct DailyModel {
         self.icon = icon
         self.dayName = dayName
         self.feelsLike = feelsLike
+    }
+    
+    init(dailyLocation: DailyLocationMO) {
+        self.min = dailyLocation.min
+        self.max = dailyLocation.max
+        self.icon = dailyLocation.icon
+        self.dayName = dailyLocation.dayName
+        self.feelsLike = dailyLocation.feelsLike
     }
     
 }
