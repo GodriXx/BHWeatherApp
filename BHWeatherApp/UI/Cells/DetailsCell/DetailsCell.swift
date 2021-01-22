@@ -28,6 +28,7 @@ class DetailsCell: UITableViewCell {
     private func setupUI() {
         self.selectionStyle = .none
         
+        //setup fonts
         self.lblTitle1.font = BHFont.caption3.defaultValue
         self.lblTitle2.font = BHFont.caption3.defaultValue
         self.lblTitle3.font = BHFont.caption3.defaultValue
@@ -38,6 +39,7 @@ class DetailsCell: UITableViewCell {
         self.lblValue3.font = BHFont.body3.defaultValue
         self.lblValue4.font = BHFont.body3.defaultValue
         
+        //setup data
         guard let viewModel = self.viewModel,
               let weatherModel = viewModel.weatherModel else { return }
         self.lblTitle1.text = BHText.details_sunrise.value

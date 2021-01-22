@@ -18,10 +18,12 @@ class DescriptionCell: UITableViewCell {
     }
     
     private func setupUI() {
-        
-        self.lblDescription.font = BHFont.title1.defaultValue
         self.selectionStyle = .none
         
+        //setup font
+        self.lblDescription.font = BHFont.title1.defaultValue
+        
+        //setup data
         guard let viewModel = self.viewModel,
               let weatherModel = viewModel.weatherModel else { return }
         self.lblDescription.text = (weatherModel.description ?? "").capitalized

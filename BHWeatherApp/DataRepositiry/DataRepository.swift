@@ -21,6 +21,7 @@ protocol DataRepositoryProtocol {
     func updateWeather(weatherModel: WeatherModel, onCompleted: @escaping(Bool) -> Void)
 }
 
+//DataRepository provides an abstraction of data, so that can work with a simple abstraction that has an interface (DataRepositoryProtocol)
 class DataRepository: DataRepositoryProtocol {
     
     //data base container
@@ -29,6 +30,7 @@ class DataRepository: DataRepositoryProtocol {
     //api client
     private let weatherProvider = WeatherProvider.shared
     
+    // get current weather for multiple locations from BHWeatherControl API
     func getCurrentWeathers(locations: [Location],
                             onCompleted: @escaping ([WeatherWrapper]?) -> Void) {
         self.weatherProvider.getCurrentWeathers(locations: locations) { (weathers) in
@@ -38,6 +40,7 @@ class DataRepository: DataRepositoryProtocol {
         }
     }
     
+    // get weather details for single location from BHWeatherControl API
     func getWeatherDetails(location: Location,
                            onCompleted: @escaping (WeatherWrapper?) -> Void) {
         self.weatherProvider.getWeatherDetails(location: location) { (weather) in
@@ -48,10 +51,12 @@ class DataRepository: DataRepositoryProtocol {
         
     }
     
+    // get weather models from local storage
     func getWeatherModels(onCompleted: @escaping ([WeatherModel]) -> Void) {
         onCompleted(self.dbManager.getWeatherLocation())
     }
     
+    // remove weather model from local storage
     func removeWeather(weatherModel: WeatherModel,
                        onCompleted: @escaping(Bool) -> Void) {
         
@@ -61,16 +66,19 @@ class DataRepository: DataRepositoryProtocol {
         
     }
     
+    // test if weather location exist in db by city name
     func isWeatherExist(cityName: String) -> Bool {
         self.dbManager.isWeatherExist(cityName: cityName)
     }
     
+    // save new weather model into local storage
     func saveWeather(weatherModel: WeatherModel, onCompleted: @escaping(Bool) -> Void) {
         self.dbManager.saveWeatherLocation(weatherModel: weatherModel) { (status) in
             onCompleted(status)
         }
     }
     
+    // update existing weather model into local storage
     func updateWeather(weatherModel: WeatherModel, onCompleted: @escaping(Bool) -> Void) {
         self.dbManager.updateWeather(weatherModel: weatherModel) { (status) in
             onCompleted(status)

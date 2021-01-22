@@ -14,10 +14,12 @@ protocol HomeViewDelegate: class {
 
 class HomeViewController: UIViewController, StoryboardBased {
     
+    // Outlets
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var lblEmpty: UILabel!
     @IBOutlet weak var loader: UIActivityIndicatorView!
     
+    // Variables
     private var viewModel: HomeViewModel = HomeViewModel()
     
     private var cellViewModels: [HomeWeatherCellViewModel]? {
@@ -38,11 +40,19 @@ class HomeViewController: UIViewController, StoryboardBased {
         
         let add = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(goToAddLocation))
         navigationItem.rightBarButtonItem = add
+        // UITest identifier
         add.accessibilityIdentifier = "xctest--btnAdd"
         
         self.lblEmpty.text = BHText.home_empty.value
     }
-        
+    
+    private func setupTableView() {
+        // UITest identifier
+        self.tableView.accessibilityIdentifier = "xctest--homeTableView"
+        self.tableView.registerCell(name: HomeWeatherCell.className)
+        self.tableView.separatorStyle = .none
+    }
+    
     private func getWeatherData() {
         self.loader.startAnimating()
         self.viewModel.getHomeWeatherCellViewModel { (homeWeatherCellViewModels) in
@@ -52,12 +62,6 @@ class HomeViewController: UIViewController, StoryboardBased {
         }
     }
     
-    private func setupTableView() {
-        self.tableView.accessibilityIdentifier = "xctest--homeTableView"
-        self.tableView.registerCell(name: HomeWeatherCell.className)
-        self.tableView.separatorStyle = .none
-    }
-    
     @objc private func goToAddLocation() {
         let controller = AddLocationViewController.instanciate()
         controller.homeViewDelegate = self
@@ -65,7 +69,7 @@ class HomeViewController: UIViewController, StoryboardBased {
     }
 }
 
-//tableView protocols
+//TableView protocols
 extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -92,6 +96,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let detailsVC = DetailsViewController.instanciate()
         
+        // On press, go to details weather VC
         detailsVC.viewModel = DetailsViewModel(weatherModel: self.viewModel.weatherModels[indexPath.row])
         self.show(detailsVC, sender: nil)
     }
@@ -111,6 +116,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     }
 }
 
+// Delegate to update home screen after adding new location
 extension HomeViewController: HomeViewDelegate {
     
     func updateData() {

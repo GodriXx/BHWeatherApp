@@ -9,6 +9,7 @@ import Foundation
 
 extension String {
     
+    // Return the appropriate value for string key from localizable files, using device language
     var localized: String {
         guard let bundle = Bundle.main.path(forResource: String(Locale.preferredLanguages.first?.prefix(2) ?? "en"),
                                             ofType: "lproj") else {

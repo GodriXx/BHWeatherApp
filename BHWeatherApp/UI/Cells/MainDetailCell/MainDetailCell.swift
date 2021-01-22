@@ -21,15 +21,16 @@ class MainDetailCell: UITableViewCell {
     }
     
     private func setupUI() {
+        self.selectionStyle = .none
         
+        //setup fonts
         self.lblTemps.font = BHFont.title2.defaultValue
         self.lblName.font = BHFont.body4.defaultValue
         self.lblRange.font = BHFont.body1.defaultValue
-        self.selectionStyle = .none
         
+        //setup data
         guard let viewModel = self.viewModel,
               let weatherModel = viewModel.weatherModel else { return }
-        
         self.lblName.text = weatherModel.cityName
         self.lblTemps.text = weatherModel.temperatureStr
         self.lblRange.text = weatherModel.currentTime

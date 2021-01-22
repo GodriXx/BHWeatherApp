@@ -10,6 +10,7 @@ import MapKit
 import BHWeatherControl
 import CoreData
 
+// Weather adapter
 class WeatherModel {
     
     var cityName: String?
@@ -98,14 +99,27 @@ class WeatherModel {
         return (lon1 == lon2) && (lat1 == lat2)
     }
     
-    init(dbObject: NSManagedObject) {
-        self.temperature = dbObject.value(forKeyPath: "temperature") as? Double
-        self.icon = dbObject.value(forKeyPath: "icon") as? String
-        self.currentTime = dbObject.value(forKeyPath: "currentTime") as? String
-        self.citySubtitle = dbObject.value(forKeyPath: "citySubtitle") as? String
-        self.cityName = dbObject.value(forKeyPath: "cityName") as? String
-        self.latitude = dbObject.value(forKeyPath: "latitude") as? String
-        self.longitude = dbObject.value(forKeyPath: "longitude") as? String
+    init(weatherLocation: WeatherLocationMO) {
+        self.temperature = weatherLocation.temperature
+        self.icon = weatherLocation.icon
+        self.currentTime = weatherLocation.currentTime
+        self.citySubtitle = weatherLocation.citySubtitle
+        self.cityName = weatherLocation.cityName
+        self.latitude = weatherLocation.latitude
+        self.longitude = weatherLocation.longitude
+        self.sunsetTime = weatherLocation.sunsetTime
+        self.sunriseTime = weatherLocation.sunriseTime
+        self.humidity = Int(weatherLocation.humidity)
+        self.windSpeed = weatherLocation.windSpeed
+        self.description = weatherLocation.desc
+        if let daysMO = weatherLocation.days,
+           let daysList = daysMO.array as? [DailyLocationMO] {
+            var daysModel: [DailyModel] = []
+            for day in daysList {
+                daysModel.append(DailyModel(dailyLocation: day))
+            }
+            self.days = daysModel
+        }
     }
     
 }

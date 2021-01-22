@@ -20,7 +20,7 @@ class LocationCell: UITableViewCell {
     
     func setupUI() {
         self.selectionStyle = .none
-        // used for unitTest
+        // UITest identifier
         self.accessibilityIdentifier = "xctest--locationCell"
         //setup fonts
         self.lblCity.font = BHFont.caption2.defaultValue

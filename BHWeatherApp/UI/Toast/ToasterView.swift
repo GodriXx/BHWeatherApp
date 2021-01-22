@@ -21,7 +21,6 @@ class ToasterView: UIView {
     var toastView: ToastView?
     var savedHeight: CGFloat = 80.0
     
-    // MARK: - Life cycle
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.savedHeight = frame.size.height
@@ -43,7 +42,6 @@ class ToasterView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    // MARK: - Custom
     func showWithDuration(time: Double?) {
         guard let toastView = self.toastView else { return }
         toastView.alpha = 0.0
@@ -70,7 +68,6 @@ class ToasterView: UIView {
         }
     }
     
-    // MARK: - Private
     private func hide() {
         guard let toastView = self.toastView else { return }
         toastView.removeFromSuperview()

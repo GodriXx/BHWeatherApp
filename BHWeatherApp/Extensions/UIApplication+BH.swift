@@ -9,6 +9,7 @@ import UIKit
 
 extension UIApplication {
 
+    // Get displayed top viewController
     class func topViewController(base: UIViewController? = UIApplication.shared.keyWindow?.rootViewController) -> UIViewController? {
 
         if let nav = base as? UINavigationController {
