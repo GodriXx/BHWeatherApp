@@ -10,25 +10,31 @@ import MapKit
 
 protocol AddLocationProtocol: class {
     func update(with locations: [LocationCellViewModel])
+    func handleError(error: Error)
 }
 
 class AddLocationViewController: UIViewController, StoryboardBased {
 
+    // Outlets
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var loader: UIActivityIndicatorView!
     @IBOutlet weak var lblTitle: UILabel!
     
+    // Variales
     var homeViewDelegate: HomeViewDelegate?
     
-    private let delayToReload = 0.3
-    
+    // Work items allow us to run tasks after delay with possibility to cancel it
+    // this will allow us to cancel multiple request when typing search text and run only last one, same for error toast
     private var errorTask: DispatchWorkItem = DispatchWorkItem {}
     private var task: DispatchWorkItem = DispatchWorkItem {}
     
     private var viewModel: AddLocationViewModel = AddLocationViewModel()
     
     private var location: CLLocationCoordinate2D?
+    
+    // Constants
+    private let delayToReload = 0.3
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,6 +60,7 @@ class AddLocationViewController: UIViewController, StoryboardBased {
         self.searchBar.placeholder = BHText.location_placeholder.value
         self.searchBar.becomeFirstResponder()
         
+        // UITest identifier
         self.searchBar.accessibilityIdentifier = "xctest--searchBar"
         
         self.lblTitle.text = BHText.location_title.value
@@ -67,6 +74,7 @@ class AddLocationViewController: UIViewController, StoryboardBased {
     }
     
     private func setupTableView() {
+        // UITest identifier
         self.tableView.accessibilityIdentifier = "xctest--addTableView"
         self.tableView.registerCell(name: LocationCell.className)
         self.tableView.separatorStyle = .none
@@ -75,13 +83,16 @@ class AddLocationViewController: UIViewController, StoryboardBased {
     }
    
     private func performSearchLocation() {
+        // cancel both tasks in case search text changed
         task.cancel()
         errorTask.cancel()
         
+        // prepare errorTask instructions
         self.errorTask = DispatchWorkItem {
             ToastManager.displayToast(type: .Advice, with: 2.0, and: BHText.wrong_data.value)
         }
         
+        //prepare main searh task instructions
         self.task = DispatchWorkItem {
             if let text = self.searchBar.text, !(self.searchBar.text?.isEmpty ?? true), ((self.searchBar.text?.count ?? 0) > 1) {
                 self.loader.startAnimating()
@@ -90,19 +101,19 @@ class AddLocationViewController: UIViewController, StoryboardBased {
 
 
             } else if self.searchBar.text?.count == 1 {
+                // run error task in case of error
                 DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 3.0, execute: self.errorTask)
             }
         }
         
+        // run main search task
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayToReload, execute: task)
     }
 
 }
 
+// SearchBar protocols
 extension AddLocationViewController: UISearchBarDelegate {
-    
-    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-    }
     
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
         guard let text = searchBar.text else { return }
@@ -124,6 +135,7 @@ extension AddLocationViewController: UISearchBarDelegate {
     }
 }
 
+// TableView protocols
 extension AddLocationViewController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -152,13 +164,16 @@ extension AddLocationViewController: UITableViewDelegate, UITableViewDataSource 
         guard let locationCells = self.viewModel.locationCells else { return }
         let result = locationCells[indexPath.row]
         
+        // ask for longitude/latitude for new location and save them in CoreData, then dismiss controller
         self.viewModel.getCoordinate(fromLocation: result) { (status) in
             if status {
                 self.dismiss(animated: true) {
                     guard let homeViewDelegate = self.homeViewDelegate else { return }
+                    // Update home using delegate
                     homeViewDelegate.updateData()
                 }
             } else {
+                // Display error if something went wrong in CoreData
                 ToastManager.displayToast(type: .AddError, with: 2.0, and: BHText.already_exist.value)
             }
         }
@@ -171,6 +186,11 @@ extension AddLocationViewController: UITableViewDelegate, UITableViewDataSource 
 
 //interface to update views in controller
 extension AddLocationViewController: AddLocationProtocol {
+    func handleError(error: Error) {
+        self.loader.stopAnimating()
+        ToastManager.displayToast(type: .APIError, with: 2.0, and: BHText.no_connection.value)
+    }
+    
     func update(with locations: [LocationCellViewModel]) {
         self.updateUI()
     }

@@ -7,6 +7,7 @@
 
 import UIKit
 
+// enum contains all fonts configuration used in app
 enum BHFont {
     
     // MARK: Caption1

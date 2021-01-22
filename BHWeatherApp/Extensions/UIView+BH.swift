@@ -10,7 +10,6 @@ import UIKit
 extension UIView {
     
     func xibSetup(view: UIView) {
-        // use bounds not frame or it'll be offset
         view.frame = bounds
         addSubview(view)
         view.translatesAutoresizingMaskIntoConstraints = false

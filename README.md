@@ -83,9 +83,15 @@ Comments are present all over the app to explain some piece of code, difficultie
 - `// WARNING` : Means the code could have an important impact on other app’s components or are badly developed and could lead to leaks, crashes, problems and so on. This kind of comments could also give some keys about a behaviour, logic choices, etc.
 
 ## ➡️ Unit Tests & UI Tests
-BHWeatherApp uses iOS unit test to validate application critical modules and user interfaces
-Both tests are located in targets `BHWeatherAppTests` and `BHWeatherAppUITests`.
+BHWeatherApp uses iOS unit test to validate user interfaces in targets `BHWeatherAppUITests`.
+please ensure that software keyboard is visible during test : 
+- I/O > Keyboard > Connect Hardware Keyboard - UNCHECKED
 
 ## ➡️ Useful links
 
 * [BHWeatherControl](https://github.com/GodriXx/BHWeatherControl.git)
+
+## ➡️ Perspectives
+* Improve UI design
+* Internationalization (for now, only english is available)
+* Add support for current location

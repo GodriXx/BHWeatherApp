@@ -7,6 +7,15 @@
 
 import UIKit
 
+/**
+ 
+ StoryboardBased: Protocol allow us to instantiate a storyboard from controller's name.
+ 
+ - Author: Bassem Hatira
+ 
+ - Note: This allow us to create a couple of controller and storyboard for each scene to simplify UI creation and avoid huge storyboards; single storyboard, single scene.
+ 
+ */
 protocol StoryboardBased: class {
     static var storyboard: UIStoryboard { get }
     static func instanciate() -> Self

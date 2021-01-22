@@ -22,7 +22,7 @@ class HomeWeatherCell: UITableViewCell {
     
     func setupUI() {
         self.selectionStyle = .none
-        // used for unitTest
+        // UITest identifier
         self.accessibilityIdentifier = "xctest--weatherCell"
         //setup fonts
         self.lblTemp.font = BHFont.caption1.defaultValue
